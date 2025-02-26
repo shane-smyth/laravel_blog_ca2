@@ -35,7 +35,9 @@
             @foreach ($posts as $post)
                 <div class="flex flex-col overflow-hidden rounded-lg shadow-lg">
                     <div class="flex-shrink-0">
-                        <img class="h-48 w-full object-cover" src="{{ asset('images/' . $post->image_path) }}" alt="">
+                        <a href="/blog/{{ $post->slug }}">
+                            <img class="h-48 w-full object-cover" src="{{ asset('images/' . $post->image_path) }}" alt="">
+                        </a>
                     </div>
                     <div class="flex flex-1 flex-col justify-between bg-white p-6">
                         <div class="flex-1">
