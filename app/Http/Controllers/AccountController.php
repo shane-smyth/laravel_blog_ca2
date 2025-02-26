@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User; // Add this line to import the User model
 
 class AccountController extends Controller {
     public function index(){
@@ -25,5 +26,10 @@ class AccountController extends Controller {
         }
 
         return redirect()->route('account')->with('success', 'Profile picture updated successfully.');
+    }
+
+    public function show($id){
+        $user = User::findOrFail($id);
+        return view('account.show', compact('user'));
     }
 }

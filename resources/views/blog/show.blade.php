@@ -14,14 +14,14 @@
                     <h1 href="#" class="text-gray-900 font-bold text-3xl mb-2">{{ $post->title }}</h1>
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <a href="#">
+                            <a href="{{ route('account.show', $post->user->id) }}">
                                 <span class="sr-only">{{ $post->user->name }}</span>
-                                <img class="h-10 w-10 rounded-full" src="https://avatarfiles.alphacoders.com/337/337251.jpg" alt="">
+                                <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $post->user->profile_picture) }}" alt="">
                             </a>
                         </div>
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-900">
-                                <a href="#" class="hover:underline">{{ $post->user->name }}</a>
+                                <a href="{{ route('account.show', $post->user->id) }}" class="hover:underline">{{ $post->user->name }}</a>
                             </p>
                             <div class="flex space-x-1 text-sm text-gray-500">
                                 {{ date('jS M Y', strtotime($post->updated_at)) }}

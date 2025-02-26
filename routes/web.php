@@ -26,3 +26,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
 Route::post('/account/upload', [AccountController::class, 'uploadProfilePicture'])->name('account.upload');
+Route::get('/account/{id}', [AccountController::class, 'show'])->name('account.show');
