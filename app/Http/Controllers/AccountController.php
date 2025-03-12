@@ -28,8 +28,18 @@ class AccountController extends Controller {
         return redirect()->route('account')->with('success', 'Profile picture updated successfully.');
     }
 
-    public function show($id){
-        $user = User::findOrFail($id);
+    public function show($id) {
+        $user = User::with('posts')->findOrFail($id);
+
+        // If viewing own profile, redirect to private view
+        if(auth()->check() && auth()->id() == $user->id) {
+            return redirect()->route('account');
+        }
+
         return view('account.show', compact('user'));
+    }
+
+    public function settings() {
+        return view('account.settings'); // You'll need to create this view later
     }
 }

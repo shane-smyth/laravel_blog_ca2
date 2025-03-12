@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +27,17 @@ Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
+Route::get('/account/settings', [App\Http\Controllers\AccountController::class, 'settings'])->name('account.settings')->middleware('auth');
 Route::post('/account/upload', [AccountController::class, 'uploadProfilePicture'])->name('account.upload');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/account/{id}', [AccountController::class, 'show'])->name('account.show');
+
+// Private account routes (authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::get('/account/settings', [AccountController::class, 'settings'])->name('account.settings');
+    Route::post('/account/upload', [AccountController::class, 'uploadProfilePicture'])->name('account.upload');
+});
+
+// Public profile view
+Route::get('/users/{id}', [AccountController::class, 'show'])->name('users.show');
