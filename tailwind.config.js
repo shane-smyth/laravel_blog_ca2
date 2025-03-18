@@ -4,7 +4,14 @@ module.exports = {
     './resources/css/**/*.css',
   ],
   theme: {
-    extend: {}
+    extend: {
+        colors: {
+            'primary-green': '#132A13',
+            'secondary-green': '#606C38',
+            'light-beige': '#FEFAE0',
+            'soft-green': '#CCD5AE',
+        },
+    }
   },
   variants: {},
   plugins: [
