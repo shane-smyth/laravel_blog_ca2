@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostsController extends Controller
 {
- 
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
@@ -48,10 +48,17 @@ class PostsController extends Controller
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
         ]);
 
-        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+        // Sanitize title to remove special characters from filename
+        $sanitizedTitle = preg_replace('/[^A-Za-z0-9\- ]/', '', $request->title);
+        $sanitizedTitle = str_replace(' ', '-', strtolower($sanitizedTitle)); // Replace spaces with dashes
 
+        // Generate unique image name
+        $newImageName = uniqid() . '-' . $sanitizedTitle . '.' . $request->image->extension();
+
+        // Move image to public/images folder
         $request->image->move(public_path('images'), $newImageName);
 
+        // Store post in database
         Post::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -60,8 +67,7 @@ class PostsController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been added!');
+        return redirect('/blog')->with('message', 'Your post has been added!');
     }
 
     /**

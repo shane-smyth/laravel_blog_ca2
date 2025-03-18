@@ -20,11 +20,11 @@
     <header class="bg-secondary-green py-6 shadow-lg">
         <div class="container mx-auto flex justify-between items-center px-6">
             <div>
-                <a href="{{ url('/') }}" class="text-2xl font-bold text-primary-green no-underline hover:text-soft-green transition-colors duration-200">
+                <a href="{{ url('/') }}" class="text-2xl font-bold text-white no-underline hover:text-soft-green transition-colors duration-200">
                     Green Thumb
                 </a>
             </div>
-            <nav class="space-x-6 text-primary-green text-lg font-medium">
+            <nav class="space-x-6 text-white text-lg font-medium">
                 <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="/">Home</a>
                 <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="/blog">Blog</a>
                 @guest

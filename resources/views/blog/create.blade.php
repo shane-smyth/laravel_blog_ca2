@@ -1,62 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-4/5 m-auto text-left">
-    <div class="py-15">
-        <h1 class="text-6xl">
-            Create Post
-        </h1>
-    </div>
-</div>
- 
-@if ($errors->any())
-    <div class="w-4/5 m-auto">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li class="w-1/5 mb-4 text-gray-50 bg-red-700 rounded-2xl py-4">
-                    {{ $error }}
-                </li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    <div class="bg-light-beige min-h-screen">
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+            <div class="bg-white p-10 rounded-xl shadow-lg">
+                <div class="text-center mb-10">
+                    <h1 class="text-primary-green font-bold text-5xl">Create a New Post</h1>
+                </div>
 
-<div class="w-4/5 m-auto pt-20">
-    <form 
-        action="/blog"
-        method="POST"
-        enctype="multipart/form-data">
-        @csrf
+                @if ($errors->any())
+                    <div class="w-full max-w-3xl mx-auto mt-6">
+                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-sm">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
 
-        <input 
-            type="text"
-            name="title"
-            placeholder="Title..."
-            class="bg-transparent block border-b-2 w-full h-20 text-6xl outline-none">
+                <form action="/blog" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-        <textarea 
-            name="description"
-            placeholder="Description..."
-            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none"></textarea>
+                    <!-- Title Input -->
+                    <div class="mb-6">
+                        <label class="block text-primary-green text-lg font-semibold mb-2">Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter your post title..."
+                            class="w-full bg-light-beige border-2 border-soft-green p-4 rounded-lg text-lg focus:ring focus:ring-secondary-green outline-none">
+                    </div>
 
-        <div class="bg-grey-lighter pt-15">
-            <label class="w-44 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
-                <span class="mt-2 text-base leading-normal">
-                    Select a file
-                </span>
-                <input 
-                    type="file"
-                    name="image"
-                    class="hidden">
-            </label>
+                    <!-- Description Input -->
+                    <div class="mb-6">
+                        <label class="block text-primary-green text-lg font-semibold mb-2">Description</label>
+                        <textarea
+                            name="description"
+                            placeholder="Write something amazing..."
+                            class="w-full bg-light-beige border-2 border-soft-green p-4 rounded-lg text-lg h-40 focus:ring focus:ring-secondary-green outline-none"></textarea>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="mb-6">
+                        <label class="block text-primary-green text-lg font-semibold mb-2">Upload an Image</label>
+                        <div class="flex items-center space-x-3">
+                            <label class="cursor-pointer bg-soft-green text-primary-green py-2 px-4 rounded-lg font-semibold shadow hover:bg-secondary-green transition">
+                                Select File
+                                <input type="file" name="image" class="hidden">
+                            </label>
+                            <span class="text-gray-500 text-sm">Accepted formats: JPG, PNG</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button
+                            type="submit"
+                            class="bg-secondary-green text-light-beige px-8 py-4 rounded-full text-lg font-bold shadow-md hover:bg-primary-green transition">
+                            Submit Post
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <button    
-            type="submit"
-            class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
-            Submit Post
-        </button>
-    </form>
-</div>
-
+    </div>
 @endsection
