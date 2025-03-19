@@ -7,7 +7,7 @@
         <div class="relative bg-light-beige px-6 pt-4 pb-20 lg:px-8 lg:pt-12 lg:pb-28">
             <div class="relative mx-auto max-w-7xl">
                 <div class="w-4/5 m-auto text-center">
-                    <div class="py-5 border-b border-gray-200">
+                    <div class="py-5 border-b border-primary-green">
                         <h1 class="text-6xl text-primary-green">
                             Blog Posts
                         </h1>
