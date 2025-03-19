@@ -1,93 +1,82 @@
-<footer class="bg-gray-800 py-20 mt-20">
-    <div class="sm:grid grid-cols-3 w-4/5 pb-10 m-auto border-b-2 border-gray-700">
+<footer class="bg-primary-green py-20">
+    <div class="sm:grid grid-cols-3 w-4/5 pb-10 m-auto border-b-2 border-secondary-green">
+        <!-- Pages Section -->
         <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
+            <h3 class="text-lg sm:font-bold text-light-beige">
                 Pages
             </h3>
 
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
+            <ul class="py-4 sm:text-sm pt-4 text-soft-green">
                 <li class="pb-1">
-                    <a href="/">
+                    <a href="/" class="hover:text-light-beige transition-colors">
                         Home
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/blog">
+                    <a href="/blog" class="hover:text-light-beige transition-colors">
                         Blog
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/login">
+                    <a href="/login" class="hover:text-light-beige transition-colors">
                         Login
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/register">
+                    <a href="/register" class="hover:text-light-beige transition-colors">
                         Register
                     </a>
                 </li>
             </ul>
         </div>
 
+        <!-- Find Us Section -->
         <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
+            <h3 class="text-lg sm:font-bold text-light-beige">
                 Find Us
             </h3>
 
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
+            <ul class="py-4 sm:text-sm pt-4 text-soft-green">
                 <li class="pb-1">
-                    <a href="/">
+                    <a href="/" class="hover:text-light-beige transition-colors">
                         What we do
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/">
+                    <a href="/" class="hover:text-light-beige transition-colors">
                         Address
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/">
+                    <a href="/" class="hover:text-light-beige transition-colors">
                         Phone
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/">
+                    <a href="/" class="hover:text-light-beige transition-colors">
                         Contact
                     </a>
                 </li>
             </ul>
         </div>
 
+        <!-- Latest Posts Section -->
         <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
-                Latest posts
+            <h3 class="text-lg sm:font-bold text-light-beige">
+                Latest Posts
             </h3>
 
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
-                <li class="pb-1">
-                    <a href="/">
-                        Why we love tech
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why we love design
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why to use Laravel
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why PHP is the best
-                    </a>
-                </li>
+            <ul class="py-4 sm:text-sm pt-4 text-soft-green">
+                @forelse ($latestPosts as $post)
+                    <li class="pb-1">
+                        <a href="/blog/{{ $post->slug }}" class="hover:text-light-beige transition-colors">
+                            {{ Str::limit($post->title, 50, '...') }}
+                        </a>
+                    </li>
+                @empty
+                    <li class="pb-1 text-soft-green">No recent posts</li>
+                @endforelse
             </ul>
         </div>
     </div>
-    <p class="w-25 w-4/5 pb-3 m-auto text-xs text-gray-100 pt-6">
-        Copyright 2017-2021 Code With Dary. All Rights Reserved
-    </p>
 </footer>

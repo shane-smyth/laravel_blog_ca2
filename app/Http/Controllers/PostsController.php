@@ -82,6 +82,17 @@ class PostsController extends Controller
             ->with('post', Post::where('slug', $slug)->first());
     }
 
+
+    /**
+     * Fetch the latest posts.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getLatestPosts()
+    {
+        return Post::orderBy('created_at', 'desc')->take(4)->get();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

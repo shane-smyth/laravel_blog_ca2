@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use App\Models\Post;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        View::composer('layouts.footer', function ($view) {
+            $latestPosts = Post::orderBy('created_at', 'desc')
+                ->take(4)
+                ->get();
+            $view->with('latestPosts', $latestPosts);
+        });
     }
 }
