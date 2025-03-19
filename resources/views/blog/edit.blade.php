@@ -44,7 +44,7 @@
                         <textarea
                             name="description"
                             placeholder="Write something amazing..."
-                            class="w-full bg-light-beige border-2 border-soft-green p-4 rounded-lg text-lg h-40 focus:ring focus:ring-secondary-green outline-none">{{ $post->description }}</textarea>
+                            class="whitespace-pre-line w-full bg-light-beige border-2 border-soft-green p-4 rounded-lg text-lg h-40 focus:ring focus:ring-secondary-green outline-none">{{ trim($post->description) }}</textarea>
                     </div>
 
                     <!-- File Upload -->
