@@ -39,7 +39,47 @@ class AccountController extends Controller {
         return view('account.show', compact('user'));
     }
 
-    public function settings() {
-        return view('account.settings'); // You'll need to create this view later
+    public function settings()
+    {
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $user = auth()->user();
+
+        if (request()->ajax()) {
+            return view('account.settings', compact('user'))->render();
+        }
+
+        return redirect()->route('account');
     }
+
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.auth()->id()
+        ]);
+
+        $user = auth()->user();
+        $user->update($request->only('name', 'email'));
+
+        return redirect()->route('account.settings')->with('success', 'Profile updated successfully!');
+    }
+
+    public function removeProfilePicture()
+    {
+        $user = auth()->user();
+
+        if ($user->profile_picture) {
+            Storage::disk('public')->delete($user->profile_picture);
+            $user->profile_picture = null;
+            $user->save();
+        }
+
+        return redirect()->route('account.settings')->with('success', 'Profile picture removed!');
+    }
+
+
 }

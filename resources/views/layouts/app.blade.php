@@ -14,6 +14,61 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const settingsButton = document.querySelector('a[href*="account/settings"]');
+            if (settingsButton) {
+                settingsButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Get CSRF token from meta tag
+                    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    fetch('{{ route('account.settings') }}', {
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'text/html',
+                            'X-CSRF-TOKEN': token
+                        },
+                        credentials: 'include'
+                    })
+                        .then(response => {
+                            if (response.status === 401) {
+                                window.location.href = '{{ route('login') }}';
+                                return;
+                            }
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.text();
+                        })
+                        .then(html => {
+                            if (!html) return;
+
+                            const existingModal = document.querySelector('.modal-overlay');
+                            if (existingModal) {
+                                existingModal.remove();
+                            }
+                            document.body.insertAdjacentHTML('beforeend', html);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Could not load settings. Please try again.');
+                        });
+                });
+            }
+
+            document.body.addEventListener('click', function (e) {
+                if (e.target.matches('.modal-close') || e.target.matches('.modal-overlay')) {
+                    const modal = document.querySelector('.modal-overlay');
+                    if (modal) {
+                        modal.remove();
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body class="bg-[#FEFAE0] h-screen antialiased leading-none font-sans">
 <div id="app">

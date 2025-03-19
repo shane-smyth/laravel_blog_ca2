@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'index'])->name('account');
     Route::get('/account/settings', [AccountController::class, 'settings'])->name('account.settings');
     Route::post('/account/upload', [AccountController::class, 'uploadProfilePicture'])->name('account.upload');
+    Route::put('/account/update', [AccountController::class, 'updateProfile'])->name('account.update');
+    Route::delete('/account/remove-picture', [AccountController::class, 'removeProfilePicture'])->name('account.remove-picture');
 });
 
 // Public profile view
