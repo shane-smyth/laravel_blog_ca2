@@ -41199,13 +41199,18 @@ video {
   animation: bounce 1s infinite;
 }
 
-.background-image {
-  background-image: url("https://images.unsplash.com/photo-1557683316-973673baf926");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 600px;
+.hero-height {
+  min-height: 60vh;
+  padding-top: 80px; /* Match header height */
+  margin-top: -80px; /* Counteract the padding */
+}
+
+@media (max-width: 768px) {
+  .hero-height {
+    min-height: 50vh;
+    padding-top: 60px; /* Mobile header height */
+    margin-top: -60px;
+  }
 }
 
 @media (min-width: 640px) {
