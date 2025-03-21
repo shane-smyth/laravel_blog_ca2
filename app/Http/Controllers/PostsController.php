@@ -18,10 +18,41 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('blog.index')
-            ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
+        $posts = Post::query();
+
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $posts->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // Sort functionality
+        $sort = $request->input('sort', 'newest');
+        switch ($sort) {
+            case 'newest':
+                $posts->orderBy('updated_at', 'DESC');
+                break;
+            case 'oldest':
+                $posts->orderBy('updated_at', 'ASC');
+                break;
+            case 'title_asc':
+                $posts->orderBy('title', 'ASC');
+                break;
+            case 'title_desc':
+                $posts->orderBy('title', 'DESC');
+                break;
+            default:
+                $posts->orderBy('updated_at', 'DESC');
+        }
+
+        $posts = $posts->get();
+
+        return view('blog.index', compact('posts'));
     }
 
     /**

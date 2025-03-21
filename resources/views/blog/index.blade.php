@@ -1,16 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="bg-light-beige">
-        {{--https://tailwindflex.com/@anonymous/3-columns-blog-section --}}
         <div class="relative bg-light-beige px-6 pt-4 pb-20 lg:px-8 lg:pt-12 lg:pb-28">
             <div class="relative mx-auto max-w-7xl">
                 <div class="w-4/5 m-auto text-center">
                     <div class="py-5 border-b border-primary-green">
-                        <h1 class="text-6xl text-primary-green">
-                            Blog Posts
-                        </h1>
+                        <h1 class="text-6xl text-primary-green">Blog Posts</h1>
                     </div>
                 </div>
 
@@ -22,16 +18,43 @@
                     </div>
                 @endif
 
-                @if (Auth::check())
-                    <div class="pt-15  m-auto pb-4">
-                        <a
-                            href="/blog/create"
-                            class="bg-secondary-green text-light-beige px-8 py-4 rounded-full text-lg font-bold shadow-md hover:bg-primary-green transition">
-                            Create post
+                {{-- Action Bar: Create Post, Search, and Sort --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto max-w-7xl px-4 py-6 text-center">
+                    @if (Auth::check())
+                        <a href="/blog/create" class="bg-secondary-green text-white px-6 py-3 rounded-lg text-lg font-bold shadow-md hover:bg-primary-green transition w-full">
+                            Create Post
                         </a>
-                    </div>
-                @endif
+                    @endif
 
+                    <form method="GET" action="{{ route('blog.index') }}" class="w-full">
+                        <div class="relative">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search posts..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green">
+                            <input type="hidden" name="sort" value="{{ request('sort', 'newest') }}">
+                            <button type="submit" class="absolute right-3 top-2.5">
+                                <svg class="w-5 h-5 text-gray-500 hover:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+
+                    <form method="GET" action="{{ route('blog.index') }}" class="w-full">
+                        <div class="relative">
+                            <select name="sort" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green bg-white">
+                                <option value="newest" {{ request('sort', 'newest') == 'newest' ? 'selected' : '' }}>Newest First</option>
+                                <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+                                <option value="title_asc" {{ request('sort') == 'title_asc' ? 'selected' : '' }}>Title A-Z</option>
+                                <option value="title_desc" {{ request('sort') == 'title_desc' ? 'selected' : '' }}>Title Z-A</option>
+                            </select>
+                            <input type="hidden" name="search" value="{{ request('search') }}">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
                 <div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
                     @foreach ($posts as $post)
@@ -76,29 +99,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                @if (isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
-                                    <div class="bg-white p-4 flex justify-center gap-4">
-                                <span>
-                                    <a href="/blog/{{ $post->slug }}/edit" class="text-gray-700 italic hover:text-gray-900 pb-1 border-b-2">Edit</a>
-                                </span>
-                                        <span>
-                                    <form
-                                        action="/blog/{{ $post->slug }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="text-red-500 pr-3" type="submit">Delete</button>
-                                    </form>
-                                </span>
-                                    </div>
-                                @endif
-                            </div>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

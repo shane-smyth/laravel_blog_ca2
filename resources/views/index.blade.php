@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-                    @foreach($posts->take(6) as $post)
+                    @foreach($latestPosts->take(6) as $post)
                         <div class="flex flex-col overflow-hidden rounded-lg shadow-lg">
                             <div class="flex-shrink-0">
                                 <a href="/blog/{{ $post->slug }}">

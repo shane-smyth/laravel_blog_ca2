@@ -34,5 +34,11 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
             $view->with('latestPosts', $latestPosts);
         });
+        View::composer('index', function ($view) {
+            $latestPosts = Post::orderBy('created_at', 'desc')
+                ->take(6)
+                ->get();
+            $view->with('latestPosts', $latestPosts);
+        });
     }
 }
