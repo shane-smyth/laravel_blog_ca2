@@ -1,47 +1,63 @@
-## Laravel 8 Complete Blog
+# GreenThumb Gardening Blog 🌱
 
-This repository is linked to [this youtube video](https://www.youtube.com/watch?v=HKJDLXsTr8A&t=4710s) where I show you how to create a complete blog in Laravel 8 using best practices.
+[![Laravel](https://img.shields.io/badge/Laravel-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com)
 
-•	**Author:** Shane Smyth
+A full-featured gardening blog platform built with Laravel, featuring blog posts, comments, likes, and user authentication.
 
-## Requirements
-•	PHP 7.3 or higher <br>
-•	Node 12.13.0 or higher <br>
+---
 
-## Usage <br>
-Setting up your development environment on your local machine: <br>
-```
-git clone git@github.com:codewithdary/laravel-8-complete-blog.git
-cd laravel-8-complete-blog
-cp .env.example .env
-composer install
-php artisan key:generate
-php artisan cache:clear && php artisan config:clear
-php artisan serve
-```
+## Features ✨
 
-## Before starting <br>
-Create a database <br>
-```
-mysql
-create database laravelblog;
-exit;
-```
+### 📝 Gardening Blog Posts
+![Blog Posts Example](screenshots/blog-page.png)
+- Create/edit/delete blog posts
+- Rich text content with image uploads
+- Search and sort functionality
 
-Setup your database credentials in the .env file <br>
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravelblog
-DB_USERNAME={USERNAME}
-DB_PASSWORD={PASSWORD}
-```
+---
 
-Migrate the tables
-```
-php artisan migrate
-```
+### 💬 Social Interaction Features
+<div align="center" style="margin: 2rem 0">
+  <img src="screenshots/blog-likes.png" alt="Like System" width="45%" style="margin:0.5rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+  <img src="screenshots/blog-comments.png" alt="Comment System" width="45%" style="margin:0.5rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+</div>
 
-## Contributing
-Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.
+- Post comments with real-time updates
+- Like/unlike posts with instant feedback
+- User profiles with customizable avatars
+
+---
+
+### 👤 User Management System
+<div align="center" style="margin: 2rem 0">
+  <img src="screenshots/account-overview.png" alt="Profile Overview" width="45%" style="margin:0.5rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+  <img src="screenshots/account-settings.png" alt="Account Settings" width="45%" style="margin:0.5rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+</div>
+
+- Secure authentication system
+- Profile management dashboard
+- Password reset functionality
+
+---
+
+### 📱 Responsive Design
+<div align="center" style="margin: 2rem 0">
+  <img src="screenshots/mobile-view-1.png" alt="Mobile View 1" width="30%" style="margin:0.5rem;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+  <img src="screenshots/mobile-view-2.png" alt="Mobile View 2" width="30%" style="margin:0.5rem;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+  <img src="screenshots/mobile-view-3.png" alt="Mobile View 3" width="30%" style="margin:0.5rem;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+</div>
+
+- Mobile friendly responsive design
+- Adaptive layouts for all screen sizes
+- Touch-friendly interactive components
+
+---
+
+## Technology Highlights
+<div align="center">
+  <img src="https://laravel.com/img/logomark.min.svg" width="80" style="margin:1rem" alt="Laravel Logo">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" width="80" style="margin:1rem" alt="Tailwind CSS Logo">
+  <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" width="80" style="margin:1rem" alt="MySQL Logo">
+</div>
