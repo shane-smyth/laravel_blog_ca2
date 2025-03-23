@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{--    https://tailwindflex.com/@ron-hicks/blog-page-template--}}
     <div class="bg-light-beige">
         <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative bg-light-beige">
             <div class="bg-cover bg-center text-center overflow-hidden"
@@ -9,10 +8,9 @@
                  title="{{ $post->title }}">
             </div>
             <div class="max-w-3xl mx-auto">
-                <div
-                    class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+                <div class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
                     <div class="bg-white relative top-0 -mt-32 p-5 sm:p-10">
-                        <h1 href="#" class="text-gray-900 font-bold text-3xl mb-2">{{ $post->title }}</h1>
+                        <h1 class="text-gray-900 font-bold text-3xl mb-2">{{ $post->title }}</h1>
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
                                 <a href="{{ route('account.show', $post->user->id) }}">
@@ -41,9 +39,43 @@
                             {{ $post->description }}
                         </div>
                     </div>
-
                 </div>
             </div>
+        </div>
+
+        {{-- Comment Section --}}
+        <div class="max-w-3xl mx-auto p-5">
+            <h2 class="text-xl font-bold mt-5">Comments</h2>
+
+            @auth
+                {{-- Comment Form --}}
+                <form action="{{ route('comment.store', $post->id) }}" method="POST" class="mb-5">
+                    @csrf
+                    <textarea name="content" class="w-full p-3 border rounded focus:ring focus:ring-blue-200" placeholder="Write a comment..." required></textarea>
+                    <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Post Comment</button>
+                </form>
+            @else
+                <p class="text-gray-600 mt-2"><a href="{{ route('login') }}" class="text-blue-500 font-semibold">Log in</a> to comment.</p>
+            @endauth
+
+            {{-- Comments List --}}
+            @foreach ($post->comments as $comment)
+                <div class="border p-3 my-2 rounded bg-white shadow">
+                    <p class="text-gray-800">
+                        <strong>{{ $comment->user->name }}</strong>
+                        <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+                    </p>
+                    <p class="text-gray-700">{{ $comment->content }}</p>
+
+                    @if(auth()->check() && (auth()->user()->id === $comment->user_id || auth()->user()->id === $post->user_id))
+                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 text-sm hover:underline">Delete</button>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -58,4 +59,8 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Comments
+Route::post('/blog/{post}/comment', [CommentController::class, 'store'])->middleware('auth')->name('comment.store');
+Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy')->middleware('auth');
 
