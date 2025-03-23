@@ -44,7 +44,7 @@
         </div>
 
         {{-- Comment Section --}}
-        <div class="sm:container sm:mx-auto sm:max-w-3xl">
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative ">
             <div class="flex">
                 <div class="w-full">
                     <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-lg sm:shadow-lg my-8">
