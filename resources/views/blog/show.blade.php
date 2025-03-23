@@ -44,38 +44,89 @@
         </div>
 
         {{-- Comment Section --}}
-        <div class="max-w-3xl mx-auto p-5">
-            <h2 class="text-xl font-bold mt-5">Comments</h2>
+        <div class="sm:container sm:mx-auto sm:max-w-3xl">
+            <div class="flex">
+                <div class="w-full">
+                    <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-lg sm:shadow-lg my-8">
 
-            @auth
-                {{-- Comment Form --}}
-                <form action="{{ route('comment.store', $post->id) }}" method="POST" class="mb-5">
-                    @csrf
-                    <textarea name="content" class="w-full p-3 border rounded focus:ring focus:ring-blue-200" placeholder="Write a comment..." required></textarea>
-                    <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Post Comment</button>
-                </form>
-            @else
-                <p class="text-gray-600 mt-2"><a href="{{ route('login') }}" class="text-blue-500 font-semibold">Log in</a> to comment.</p>
-            @endauth
+                        <!-- Comments Header -->
+                        <header class="font-semibold bg-secondary-green text-white py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-lg">
+                            {{ __('Comments') }} ({{ $post->comments->count() }})
+                        </header>
 
-            {{-- Comments List --}}
-            @foreach ($post->comments as $comment)
-                <div class="border p-3 my-2 rounded bg-white shadow">
-                    <p class="text-gray-800">
-                        <strong>{{ $comment->user->name }}</strong>
-                        <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
-                    </p>
-                    <p class="text-gray-700">{{ $comment->content }}</p>
+                        <div class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8 py-6">
+                            @auth
+                                {{-- Comment Form --}}
+                                <form action="{{ route('comment.store', $post->id) }}" method="POST" class="space-y-4">
+                                    @csrf
+                                    <div class="flex flex-wrap">
+                                        <label class="block text-primary-green text-sm font-bold mb-2">
+                                            {{ __('Write a comment') }}:
+                                        </label>
+                                        <textarea name="content"
+                                                  class="w-full px-4 py-2 border-2 border-soft-green rounded-lg focus:ring-2 focus:ring-primary-green focus:border-primary-green bg-light-beige"
+                                                  rows="4"
+                                                  placeholder="Join the discussion..."
+                                                  required></textarea>
+                                    </div>
+                                    <button type="submit"
+                                            class="w-full sm:w-auto select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal text-white bg-secondary-green hover:bg-primary-green transition-colors sm:py-4 px-8">
+                                        {{ __('Post Comment') }}
+                                    </button>
+                                </form>
+                            @else
+                                <p class="text-center text-primary-green">
+                                    <a href="{{ route('login') }}" class="text-secondary-green hover:text-primary-green no-underline hover:underline">
+                                        {{ __('Log in to comment') }}
+                                    </a>
+                                </p>
+                            @endauth
 
-                    @if(auth()->check() && (auth()->user()->id === $comment->user_id || auth()->user()->id === $post->user_id))
-                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 text-sm hover:underline">Delete</button>
-                        </form>
-                    @endif
+                            {{-- Comments List --}}
+                            <div class="space-y-6">
+                                @foreach ($post->comments as $comment)
+                                    <div class="border-2 border-soft-green rounded-lg p-4 bg-light-beige">
+                                        <div class="flex justify-between items-start">
+                                            <div class="flex-1">
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <span class="font-semibold text-primary-green">
+                                                        {{ $comment->user->name }}
+                                                    </span>
+                                                    @if($comment->user_id === $post->user_id)
+                                                        <span class="px-2 py-1 text-xs bg-primary-green text-white rounded-full">
+                                                        {{ __('Author') }}
+                                                    </span>
+                                                    @endif
+                                                    <span class="text-sm text-secondary-green">
+                                                        {{ $comment->created_at->diffForHumans() }}
+                                                    </span>
+                                                </div>
+                                                <p class="text-gray-700 whitespace-pre-line">
+                                                    {{ $comment->content }}
+                                                </p>
+                                            </div>
+
+                                            @if(auth()->check() && (auth()->id() === $comment->user_id || auth()->id() === $post->user_id))
+                                                <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                            class="text-secondary-green hover:text-primary-green transition-colors"
+                                                            onclick="return confirm('{{ __('Are you sure you want to delete this comment?') }}')">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 @endsection
