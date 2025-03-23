@@ -74,7 +74,7 @@ A full-featured gardening blog platform built with Laravel, featuring blog posts
 
 ### Installation
 1. Clone the repository
-```bash
+```
 https://github.com/shane-smyth/laravel_blog_ca2.git
 cd laravel_blog_ca2
 
