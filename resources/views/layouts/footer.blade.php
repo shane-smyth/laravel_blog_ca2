@@ -18,6 +18,11 @@
                     </a>
                 </li>
                 <li class="pb-1">
+                    <a href="/about" class="hover:text-light-beige transition-colors">
+                        About
+                    </a>
+                </li>
+                <li class="pb-1">
                     <a href="/login" class="hover:text-light-beige transition-colors">
                         Login
                     </a>

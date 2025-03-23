@@ -43,3 +43,8 @@ Route::middleware('auth')->group(function () {
 
 // Public profile view
 Route::get('/users/{id}', [AccountController::class, 'show'])->name('users.show');
+
+
+Route::get('/about', function () {
+    return view('about.index');
+});

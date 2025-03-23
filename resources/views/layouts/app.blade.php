@@ -82,6 +82,7 @@
             <nav class="space-x-6 text-white text-lg font-medium">
                 <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="/">Home</a>
                 <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="/blog">Blog</a>
+                <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="/about">About</a>
                 @guest
                     <a class="no-underline hover:underline hover:text-soft-green transition-colors duration-200" href="{{ route('login') }}">{{ __('Login') }}</a>
                     @if (Route::has('register'))
