@@ -7,6 +7,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 
 /*
@@ -64,3 +65,6 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::post('/blog/{post}/comment', [CommentController::class, 'store'])->middleware('auth')->name('comment.store');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy')->middleware('auth');
 
+// Likes
+Route::post('/posts/{post}/like', [LikeController::class, 'store'])->name('posts.like');
+Route::delete('/posts/{post}/like', [LikeController::class, 'destroy'])->name('posts.unlike');
