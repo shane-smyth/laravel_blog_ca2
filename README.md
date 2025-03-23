@@ -38,7 +38,6 @@ A full-featured gardening blog platform built with Laravel, featuring blog posts
 
 - Secure authentication system
 - Profile management dashboard
-- Password reset functionality
 
 ---
 
