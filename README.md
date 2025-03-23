@@ -61,3 +61,44 @@ A full-featured gardening blog platform built with Laravel, featuring blog posts
   <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" width="80" style="margin:1rem" alt="Tailwind CSS Logo">
   <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" width="80" style="margin:1rem" alt="MySQL Logo">
 </div>
+
+---
+## Getting Started 🚀
+
+### Prerequisites
+- PHP 8.1+
+- Composer 2.5+
+- Node.js 18+
+- npm 9+
+- MySQL 8.0+
+
+### Installation
+1. Clone the repository
+```bash
+https://github.com/shane-smyth/laravel_blog_ca2.git
+cd laravel_blog_ca2
+
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
+php artisan cache:clear && php artisan config:clear
+php artisan serve
+```
+
+
+Create a database and update the .env file
+``` 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravelblog
+DB_USERNAME={USERNAME}
+DB_PASSWORD={PASSWORD}
+```
+
+Migrate the tables
+```
+php artisan migrate
+```
