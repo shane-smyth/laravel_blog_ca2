@@ -23,6 +23,11 @@
                     </a>
                 </li>
                 <li class="pb-1">
+                    <a href="/contact" class="hover:text-light-beige transition-colors">
+                        Contact
+                    </a>
+                </li>
+                <li class="pb-1">
                     <a href="/login" class="hover:text-light-beige transition-colors">
                         Login
                     </a>
@@ -43,24 +48,29 @@
 
             <ul class="py-4 sm:text-sm pt-4 text-soft-green">
                 <li class="pb-1">
-                    <a href="/" class="hover:text-light-beige transition-colors">
-                        What we do
+                    <a href="/about" class="hover:text-light-beige transition-colors">
+                        About Us
                     </a>
                 </li>
                 <li class="pb-1">
-                    <a href="/" class="hover:text-light-beige transition-colors">
-                        Address
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/" class="hover:text-light-beige transition-colors">
-                        Phone
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/" class="hover:text-light-beige transition-colors">
+                    <a href="/contact" class="hover:text-light-beige transition-colors">
                         Contact
                     </a>
+                </li>
+                <li class="pb-1">
+                    <p class="hover:text-light-beige transition-colors">
+                        123 Greenway St, Gardenville, Dublin 2
+                    </p>
+                </li>
+                <li class="pb-1">
+                    <p class="hover:text-light-beige transition-colors">
+                        contact@greenthumb.com
+                    </p>
+                </li>
+                <li class="pb-1">
+                    <p class="hover:text-light-beige transition-colors">
+                        +1 (555) 123-4567
+                    </p>
                 </li>
             </ul>
         </div>

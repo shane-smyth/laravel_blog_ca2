@@ -5,6 +5,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 
 
 /*
@@ -45,6 +46,16 @@ Route::middleware('auth')->group(function () {
 Route::get('/users/{id}', [AccountController::class, 'show'])->name('users.show');
 
 
+// About
 Route::get('/about', function () {
     return view('about.index');
 });
+
+
+// Contact
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
